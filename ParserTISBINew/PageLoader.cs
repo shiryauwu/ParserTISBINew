@@ -42,6 +42,8 @@ namespace ParserTISBINew
             Console.Clear();    
             return Text;
         }
+
+        
         
     }
 }

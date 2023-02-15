@@ -35,27 +35,46 @@ namespace ParserTISBINew
             Thread.Sleep(3000);
             driver.FindElement(By.XPath(@"//button[@type='button'][contains(.,'Начать работу')]")).Click();
             Thread.Sleep(5000);
-            driver.FindElement(By.XPath(@"//a[contains(@data-toggle,'dropdown')]")).Click();
-            Thread.Sleep(3000);
-            driver.FindElement(By.XPath(@"//a[@class='dropdown-item'][contains(.,'Расписание занятий')]")).Click();
-            Console.Clear();
-            Thread.Sleep(2000);
-
-            for (int i = 1; i <= 6; i++)
+            for (int i = 0; i < 10; i++)
             {
                 try
                 {
-                    Text += driver.FindElement(By.XPath($@"(//td[@class='align-middle table-primary'])[{i}]")).Text;
-                    
+
+                    driver.FindElement(By.XPath(@$"(//button[contains(.,'Ознакомиться')])[{i}]")).Click();
+
                 }
-                catch (Exception e) 
+                catch (Exception ex)
                 {
                     continue;
                 }
-                
-                
             }
-            return Text;
+
+
+                driver.FindElement(By.XPath(@"//a[contains(@data-toggle,'dropdown')]")).Click();
+                Thread.Sleep(3000);
+                driver.FindElement(By.XPath(@"//a[@class='dropdown-item'][contains(.,'Расписание занятий')]")).Click();
+                Console.Clear();
+                Thread.Sleep(2000);
+
+                for (int i = 1; i <= 6; i++)
+                {
+                    try
+                    {
+
+                        Text += driver.FindElement(By.XPath($@"(//td[@class='align-middle table-primary'])[{i}]")).Text;
+
+                    }
+                    catch (Exception e)
+                    {
+                        continue;
+                    }
+
+
+                }
+
+
+
+                return Text;
             
         }
     }
