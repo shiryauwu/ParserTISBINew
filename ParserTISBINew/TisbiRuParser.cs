@@ -22,6 +22,7 @@ namespace ParserTISBINew
             OpenPage();
             IWebElement tag = driver.FindElement(By.ClassName(@"covid-message"));
             Text = tag.Text;
+            driver.Close();
             Console.Clear();
             return Text;
         }
@@ -31,6 +32,7 @@ namespace ParserTISBINew
             OpenPage();
             IWebElement tag = driver.FindElement(By.ClassName(@"covid-scheme"));
             Text = tag.Text;
+            driver.Close();
             Console.Clear();
             return Text;
         }
@@ -39,6 +41,7 @@ namespace ParserTISBINew
         {
             OpenPage();
             return ParseText(3, 11);
+
         }
 
         public string ButtonFour()

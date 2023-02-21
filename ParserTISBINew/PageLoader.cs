@@ -39,7 +39,8 @@ namespace ParserTISBINew
                 
                 startCycle++;
             }
-            Console.Clear();    
+            Console.Clear();
+            driver.Close();
             return Text;  // Возвращает определённое значение текстовой перемнной
         }
 
