@@ -16,7 +16,7 @@ namespace ParserTISBINew
         {
 
         }
-
+        // Эти методы просто выводит информацию для абитуриентов
         public string ButtonOne()
         {
             OpenPage();

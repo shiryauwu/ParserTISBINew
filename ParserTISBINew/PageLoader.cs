@@ -11,11 +11,11 @@ namespace ParserTISBINew
 {
     internal class PageLoader
     {
-        public IWebDriver driver = new ChromeDriver();
+        public IWebDriver driver = new ChromeDriver();  // Открывает браузер
         public string Url { get; set; }
         
         public string Text { get; set; }
-        public string TextLi { get; set; }
+        
 
         public PageLoader(string url)
         {
@@ -25,7 +25,7 @@ namespace ParserTISBINew
         // Открывает сайты с помощью Драйвера
         public void OpenPage()
         {
-            driver.Navigate().GoToUrl(@$"{Url}");
+            driver.Navigate().GoToUrl(@$"{Url}");  //Переходит на определённый сайт
      
         }
         // Парсит абзацы текста сайта ТИСБИ
@@ -34,13 +34,13 @@ namespace ParserTISBINew
             while(startCycle <= endCycle) 
             {
 
-                IWebElement tag = driver.FindElement(By.XPath($@"(//div[contains(@class,'postupit-tabs__text')])[{startCycle}]"));
-                Text += tag.Text;
+                IWebElement tag = driver.FindElement(By.XPath($@"(//div[contains(@class,'postupit-tabs__text')])[{startCycle}]"));  // Ищет абзацы с номером i и помещает в переменную
+                Text += tag.Text;  // Помещает текстовой вариант тегов в переменнную
                 
                 startCycle++;
             }
             Console.Clear();    
-            return Text;
+            return Text;  // Возвращает определённое значение текстовой перемнной
         }
 
         

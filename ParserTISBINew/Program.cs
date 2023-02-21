@@ -6,7 +6,7 @@ namespace ParserTISBINew
         public static void Main(string[] args)
         {
             var menu = new Menu();
-            menu.StartMenu();
+            menu.StartMenu();  // Начинает работу программы, вызывая меню
         }
     }
 }

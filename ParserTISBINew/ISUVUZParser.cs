@@ -20,27 +20,27 @@ namespace ParserTISBINew
             Password = password;
         }
 
-        public string ScheduleParser()
+        public string ScheduleParser()  //Парсит инфу с сайта ису вуз
         {
-            OpenPage();
+            OpenPage();  //Открывает сайт
 
             Thread.Sleep(1500);
-            driver.FindElement(By.XPath(@"//input[contains(@name,'Login')]")).SendKeys(Login);
+            driver.FindElement(By.XPath(@"//input[contains(@name,'Login')]")).SendKeys(Login);  // Вводит логин
 
 
-            driver.FindElement(By.XPath(@"//input[contains(@name,'Password')]")).SendKeys(Password);
+            driver.FindElement(By.XPath(@"//input[contains(@name,'Password')]")).SendKeys(Password);  //Вводит пароль
             Thread.Sleep(1500);
 
-            driver.FindElement(By.XPath(@"//button[@type='button'][contains(.,'Войти')]")).Click();
+            driver.FindElement(By.XPath(@"//button[@type='button'][contains(.,'Войти')]")).Click(); //Нажимает кнопку Войти
             Thread.Sleep(3000);
-            driver.FindElement(By.XPath(@"//button[@type='button'][contains(.,'Начать работу')]")).Click();
+            driver.FindElement(By.XPath(@"//button[@type='button'][contains(.,'Начать работу')]")).Click(); // Нажимает на кнопку Начать Работу
             Thread.Sleep(5000);
             for (int i = 0; i < 10; i++)
             {
                 try
                 {
 
-                    driver.FindElement(By.XPath(@$"(//button[contains(.,'Ознакомиться')])[{i}]")).Click();
+                    driver.FindElement(By.XPath(@$"(//button[contains(.,'Ознакомиться')])[{i}]")).Click();  // Ищет кнопку Ознакомиться, если её нет то он продолжает её искать
 
                 }
                 catch (Exception ex)
@@ -50,9 +50,9 @@ namespace ParserTISBINew
             }
 
 
-                driver.FindElement(By.XPath(@"//a[contains(@data-toggle,'dropdown')]")).Click();
+                driver.FindElement(By.XPath(@"//a[contains(@data-toggle,'dropdown')]")).Click();  //Открывает меню для взаимодействия с сайтом
                 Thread.Sleep(3000);
-                driver.FindElement(By.XPath(@"//a[@class='dropdown-item'][contains(.,'Расписание занятий')]")).Click();
+                driver.FindElement(By.XPath(@"//a[@class='dropdown-item'][contains(.,'Расписание занятий')]")).Click(); // Нажимает на Расписание занятий
                 Console.Clear();
                 Thread.Sleep(2000);
 
@@ -61,7 +61,7 @@ namespace ParserTISBINew
                     try
                     {
 
-                        Text += driver.FindElement(By.XPath($@"(//td[@class='align-middle table-primary'])[{i}]")).Text;
+                        Text += driver.FindElement(By.XPath($@"(//td[@class='align-middle table-primary'])[{i}]")).Text;  // Ищет ячейки таблицы с синим цветом и помещает в переменную
 
                     }
                     catch (Exception e)
@@ -74,7 +74,7 @@ namespace ParserTISBINew
 
 
 
-                return Text;
+                return Text;  //Возвращает значение переменной с расписанием внутри, иначе ничего не возвращает.
             
         }
     }
