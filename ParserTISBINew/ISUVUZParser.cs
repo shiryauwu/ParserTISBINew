@@ -63,7 +63,8 @@ namespace ParserTISBINew
 
                         Text += driver.FindElement(By.XPath($@"(//td[@class='align-middle table-primary'])[{i}]")).Text;  // Ищет ячейки таблицы с синим цветом и помещает в переменную
                         if(Text is null)
-                        Console.WriteLine("На сегодня занятий нет");
+                        return "На сегодня занятий нет";
+
                     }
                     catch (Exception e)
                     {
