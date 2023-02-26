@@ -32,7 +32,7 @@ namespace ParserTISBINew
             Thread.Sleep(1500);
 
             driver.FindElement(By.XPath(@"//button[@type='button'][contains(.,'Войти')]")).Click(); //Нажимает кнопку Войти
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
             driver.FindElement(By.XPath(@"//button[@type='button'][contains(.,'Начать работу')]")).Click(); // Нажимает на кнопку Начать Работу
             Thread.Sleep(5000);
             for (int i = 0; i < 10; i++)
@@ -51,10 +51,10 @@ namespace ParserTISBINew
 
 
                 driver.FindElement(By.XPath(@"//a[contains(@data-toggle,'dropdown')]")).Click();  //Открывает меню для взаимодействия с сайтом
-                Thread.Sleep(3000);
+                Thread.Sleep(5000);
                 driver.FindElement(By.XPath(@"//a[@class='dropdown-item'][contains(.,'Расписание занятий')]")).Click(); // Нажимает на Расписание занятий
                 Console.Clear();
-                Thread.Sleep(2000);
+                Thread.Sleep(5000);
 
                 for (int i = 1; i <= 6; i++)
                 {
@@ -62,8 +62,7 @@ namespace ParserTISBINew
                     {
 
                         Text += driver.FindElement(By.XPath($@"(//td[@class='align-middle table-primary'])[{i}]")).Text;  // Ищет ячейки таблицы с синим цветом и помещает в переменную
-                        if(Text is null)
-                        return "На сегодня занятий нет";
+                        
 
                     }
                     catch (Exception e)
@@ -76,6 +75,8 @@ namespace ParserTISBINew
 
 
             driver.Close();
+            if (Text is null)
+                return "На сегодня занятий нет";
             return Text;  //Возвращает значение переменной с расписанием внутри, иначе ничего не возвращает.
             
         }
