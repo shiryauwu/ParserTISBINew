@@ -76,7 +76,10 @@ namespace ParserTISBINew
 
             driver.Close();
             if (Text is null)
-                return "На сегодня занятий нет";
+            {
+                Text = "На сегодня занятий нет";
+                return Text;
+            }
             return Text;  //Возвращает значение переменной с расписанием внутри, иначе ничего не возвращает.
             
         }
