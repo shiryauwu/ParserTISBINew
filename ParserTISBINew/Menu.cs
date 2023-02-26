@@ -21,8 +21,14 @@ namespace ParserTISBINew
             {
                 case "1":
                     Console.Clear();
-                    ScheduleParseMenu();
-                    
+                    try
+                    {
+                        ScheduleParseMenu();
+                    }
+                    catch (Exception ex)
+                    {
+                        ScheduleParseMenu();
+                    }
                     break;
                 case "2":
                     Console.Clear();
