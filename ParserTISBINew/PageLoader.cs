@@ -15,6 +15,7 @@ namespace ParserTISBINew
         public string Url { get; set; }
         
         public string Text { get; set; }
+
         
 
         public PageLoader(string url)

@@ -13,27 +13,58 @@ namespace ParserTISBINew
         public string Login { get; set; }
         public string Password { get; set; }
         
-        public ISUVUZParser(string url, string login, string password) : base(url)
+        public ISUVUZParser(string url) : base(url)
         {
             
-            Login = login;
-            Password = password;
+            
         }
 
+
+        public void LoginAndPassword()
+        {
+            
+            Login = Console.ReadLine();
+            Password = Console.ReadLine();
+        }
         public string ScheduleParser()  //Парсит инфу с сайта ису вуз
         {
             OpenPage();  //Открывает сайт
+            
+            
+                Thread.Sleep(1500);
+                driver.FindElement(By.XPath(@"//input[contains(@name,'Login')]")).SendKeys(Login);  // Вводит логин
 
-            Thread.Sleep(1500);
-            driver.FindElement(By.XPath(@"//input[contains(@name,'Login')]")).SendKeys(Login);  // Вводит логин
 
+                driver.FindElement(By.XPath(@"//input[contains(@name,'Password')]")).SendKeys(Password);  //Вводит пароль
+                Thread.Sleep(1500);
 
-            driver.FindElement(By.XPath(@"//input[contains(@name,'Password')]")).SendKeys(Password);  //Вводит пароль
-            Thread.Sleep(1500);
+                driver.FindElement(By.XPath(@"//button[@type='button'][contains(.,'Войти')]")).Click(); //Нажимает кнопку Войти
+                Thread.Sleep(5000);
+            try
+            {
+                driver.FindElement(By.XPath(@"//button[@type='button'][contains(.,'Начать работу')]")).Click();  // Нажимает на кнопку Начать Работу
+            }
+            catch (Exception e)
+            {
+                Text = "Ошибка при вводе логина или пароля, повторите попытку:";
+                return Text;
+                LoginAndPassword();
+            }
 
-            driver.FindElement(By.XPath(@"//button[@type='button'][contains(.,'Войти')]")).Click(); //Нажимает кнопку Войти
-            Thread.Sleep(5000);
-            driver.FindElement(By.XPath(@"//button[@type='button'][contains(.,'Начать работу')]")).Click(); // Нажимает на кнопку Начать Работу
+            using(TisbiContext db = new TisbiContext())
+            {
+                User user = new User { _Login = Login, _Password = Password, Admin = false };
+
+                db.Users.Add(user);
+                db.SaveChanges();
+                Console.WriteLine("Changes Saved!");
+
+                var users = db.Users.ToList();
+                foreach(User u in users)
+                {
+                    Console.WriteLine($"{u.Id}, {u._Login}, {u._Password}");
+                }
+            }
             Thread.Sleep(5000);
             for (int i = 0; i < 10; i++)
             {

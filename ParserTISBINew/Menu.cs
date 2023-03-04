@@ -41,10 +41,10 @@ namespace ParserTISBINew
         {
             
             Console.Clear();
+            
+            var isuVuzParser = new ISUVUZParser("https://isu.tisbi.ru/student/login");
             Console.WriteLine("Введите логин и пароль от аккаунта ИСУ ВУЗ:");
-            string login = Console.ReadLine();
-            string password = Console.ReadLine();
-            var isuVuzParser = new ISUVUZParser("https://isu.tisbi.ru/student/login", login, password);
+            isuVuzParser.LoginAndPassword();
             Console.WriteLine(isuVuzParser.ScheduleParser());
         }
         public void AbiturMenu()
