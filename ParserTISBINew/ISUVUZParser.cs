@@ -54,15 +54,17 @@ namespace ParserTISBINew
             using(TisbiContext db = new TisbiContext())
             {
                 User user = new User { _Login = Login, _Password = Password, Admin = false };
-
-                db.Users.Add(user);
-                db.SaveChanges();
-                Console.WriteLine("Changes Saved!");
-
-                var users = db.Users.ToList();
-                foreach(User u in users)
+                async Task CreateDatabase()
                 {
-                    Console.WriteLine($"{u.Id}, {u._Login}, {u._Password}");
+                    await db.Users.AddAsync(user);
+                    await db.SaveChangesAsync();
+                    Console.WriteLine("Changes Saved!");
+
+                    var users = db.Users.ToList();
+                    foreach (User u in users)
+                    {
+                        Console.WriteLine($"{u.Id}, {u._Login}, {u._Password}");
+                    }
                 }
             }
             Thread.Sleep(5000);
